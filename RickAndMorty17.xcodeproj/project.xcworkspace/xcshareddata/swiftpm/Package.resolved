@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "rickandmortyapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/erikfloresq/RickAndMortyAPI",
+      "state" : {
+        "revision" : "de4a4ab296b1117d75d3d4e48ced5120e0af1caa",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}

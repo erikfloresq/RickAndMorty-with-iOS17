@@ -8,13 +8,29 @@
 import SwiftUI
 import SwiftData
 
+enum AppTabs {
+    case character
+    case favorite
+}
+
 @main
 struct RickAndMorty17App: App {
+    @State var selectionTab: AppTabs = .character
+    let charactersViewModel = CharactersViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView(selection: $selectionTab) {
+                CharactersView(viewModel: charactersViewModel)
+                    .tabItem {
+                        Label("Characters", systemImage: "person")
+                    }
+                FavoritesView()
+                    .tabItem {
+                        Label("Favorites", systemImage: "star")
+                    }
+            }
         }
-        .modelContainer(for: Item.self)
+        .modelContainer(for: RMCharacter.self)
     }
 }

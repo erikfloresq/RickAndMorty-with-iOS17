@@ -6,21 +6,69 @@
 //
 
 import SwiftUI
-import RickAndMortyAPI
+import SwiftData
 
 struct CharacterDetailView: View {
-    let character: Character
+    let character: RMCharacter
     
     var body: some View {
-        HStack {
-            AsyncImage(url: URL(string: character.image)) { image in
-                image
-                    .resizable()
-                    .frame(height: 200)
-            } placeholder: {
-                Color.gray
+        ScrollView {
+            VStack(spacing: 20) {
+                ZStack {
+                    AsyncImage(url: URL(string: character.image),
+                               transaction: Transaction(animation: .easeInOut)) { imagePhase in
+                        switch imagePhase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                        case .failure, .empty:
+                            Color.gray
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Text(character.name)
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .padding()
+                            Spacer()
+                        }
+                    }
+                    
+                }
+                .frame(height: 350)
+                Grid(horizontalSpacing: 30) {
+                    DetailGridRow(title: "Status", value: character.status)
+                    DetailGridRow(title: "Species", value: character.species)
+                    DetailGridRow(title: "Type", value: character.type)
+                    DetailGridRow(title: "Gender", value: character.gender)
+                    DetailGridRow(title: "URL", value: character.url)
+                    DetailGridRow(title: "Episodes", value: "\(character.episode.count)")
+                    DetailGridRow(title: "Created", value: character.created)
+                }
+                .padding()
             }
-            Text(character.name)
+        }
+        .ignoresSafeArea(edges: .top)
+    }
+}
+
+struct DetailGridRow: View {
+    let title: String
+    let value: String
+    
+    var body: some View {
+        GridRow {
+            if !value.isEmpty {
+                Text(title).font(.title3).fontWeight(.bold).gridColumnAlignment(.leading)
+                Text(value).gridColumnAlignment(.leading)
+            }
+        }
+        if !value.isEmpty {
+            Divider()
         }
     }
 }

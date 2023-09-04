@@ -6,37 +6,62 @@
 //
 
 import SwiftUI
+import SwiftData
 import OSLog
-import RickAndMortyAPI
 
 struct CharactersView: View {
-    let viewModel: CharactersViewModel
-    let logger = Logger(subsystem: "dev.erikflores.RickAndMorty17", category: "CharactersView")
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Query(sort: [SortDescriptor(\RMCharacter.id)], animation: .easeInOut)
+    private var characters: [RMCharacter]
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.characters) { character in
-                    NavigationLink(value: character) {
-                        CharacterCell(character: character)
-                    }
-                }
-            }
-            .navigationDestination(for: Character.self, destination: { character in
-                CharacterCell(character: character)
-            })
-            .navigationTitle("Rick&Morty")
-        }
-        .task {
-            do {
-                try await viewModel.getCharacter()
-            } catch {
-                logger.error("Error to get Character")
+            if horizontalSizeClass == .compact {
+                CharactersCompactView(characters: characters)
+            } else {
+                CharactersRegularView(characters: characters)
             }
         }
     }
 }
 
-#Preview {
-    CharactersView(viewModel: CharactersViewModel())
+struct CharactersCompactView: View {
+    var characters: [RMCharacter]
+    
+    var body: some View {
+        List {
+            ForEach(characters) { character in
+                NavigationLink(value: character) {
+                    CharacterCell(character: character)
+                }
+            }
+        }
+        .navigationDestination(for: RMCharacter.self, destination: { character in
+            CharacterDetailView(character: character)
+        })
+        .navigationTitle("Rick&Morty")
+    }
 }
+
+struct CharactersRegularView: View {
+    var characters: [RMCharacter]
+    let columns: [GridItem] = [
+        GridItem(.fixed(250), spacing: 10, alignment: .center),
+        GridItem(.fixed(250), spacing: 10, alignment: .center),
+        GridItem(.fixed(250), spacing: 10, alignment: .center)
+    ]
+    
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(characters) { character in
+                    CharacterGrid(character: character)
+                }
+            }
+        }
+    }
+}
+
+//#Preview {
+//    CharactersView(viewModel: CharactersViewModel())
+//}

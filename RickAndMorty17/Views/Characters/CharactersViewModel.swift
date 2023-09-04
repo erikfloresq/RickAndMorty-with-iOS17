@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import RickAndMortyAPI
 import Observation
 
 @Observable class CharactersViewModel {
-    var characters: [Character] = []
+    var characters: [RMCharacter] = []
     private let repository = Repository()
     
     func getCharacter() async throws {

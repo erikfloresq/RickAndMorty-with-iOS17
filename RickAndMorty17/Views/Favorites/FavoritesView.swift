@@ -9,17 +9,29 @@ import SwiftUI
 import SwiftData
 
 struct FavoritesView: View {
-    @Query private var characters: [RMCharacter]
+    @Query(filter: #Predicate { $0.isFavorite == true },
+           sort: [SortDescriptor(\RMCharacter.id)],
+           animation: .easeInOut)
+    private var characters: [RMCharacter]
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(characters) { character in
-                    CharacterCellView(image: character.image, name: character.name)
+            if characters.isEmpty {
+                ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
+            } else {
+                List {
+                    ForEach(characters) { character in
+                        NavigationLink(value: character) {
+                            CharacterCell(character: character)
+                        }
+                    }
                 }
+                .navigationDestination(for: RMCharacter.self, destination: { character in
+                    CharacterDetailView(character: character)
+                })
             }
-            .navigationTitle("Favorites")
         }
+        .navigationTitle("Favorites")
     }
 }
 

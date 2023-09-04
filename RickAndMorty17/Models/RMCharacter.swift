@@ -20,8 +20,19 @@ class RMCharacter {
     var episode: [String]
     var url: String
     var created: String
+    var isFavorite: Bool
     
-    init(id: Int, name: String, status: String, species: String, type: String, gender: String, image: String, episode: [String], url: String, created: String) {
+    init(id: Int,
+         name: String,
+         status: String,
+         species: String,
+         type: String,
+         gender: String,
+         image: String,
+         episode: [String],
+         url: String,
+         created: String,
+         isFavorite: Bool) {
         self.id = id
         self.name = name
         self.status = status
@@ -32,5 +43,6 @@ class RMCharacter {
         self.episode = episode
         self.url = url
         self.created = created
+        self.isFavorite = isFavorite
     }
 }

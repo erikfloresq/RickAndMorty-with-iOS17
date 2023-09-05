@@ -15,22 +15,20 @@ struct CharacterGrid: View {
         CharacterGridView(image: character.image,
                           name: character.name,
                           isFavorite: character.isFavorite)
-        .contextMenu(
-            ContextMenu(menuItems: {
-                Button(action: {
-                    character.isFavorite = true
-                    modelContext.insert(character)
-                }, label: {
-                    Label("Favorite", systemImage: "star.fill")
-                })
-                Button(action: {
-                    character.isFavorite = false
-                    modelContext.insert(character)
-                }, label: {
-                    Label("Remove Favorite", systemImage: "star.slash.fill")
-                })
+        .contextMenu {
+            Button(action: {
+                character.isFavorite = true
+                modelContext.insert(character)
+            }, label: {
+                Label("Favorite", systemImage: "star.fill")
             })
-        )
+            Button(action: {
+                character.isFavorite = false
+                modelContext.insert(character)
+            }, label: {
+                Label("Remove Favorite", systemImage: "star.slash.fill")
+            })
+        }
     }
 }
 
@@ -47,6 +45,7 @@ struct CharacterGridView: View {
                 case .success(let image):
                     image
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 100, height: 100)
                         .clipShape(.rect(cornerRadius: 5))
                 case .failure, .empty:
@@ -57,6 +56,7 @@ struct CharacterGridView: View {
             }
             .frame(width: 100, height: 100)
             .clipShape(.rect(cornerRadius: 5))
+            .aspectRatio(1, contentMode: .fit)
             HStack {
                 Text(name)
                 if isFavorite {

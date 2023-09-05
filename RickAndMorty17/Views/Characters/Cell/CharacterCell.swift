@@ -19,26 +19,34 @@ struct CharacterCell: View {
                           name: character.name,
                           isFavorite: character.isFavorite)
         .swipeActions(edge: .trailing) {
-            Button {
-                character.isFavorite = true
-                modelContext.insert(character)
-                addFavorite.toggle()
-            } label: {
-                Label("Favorite", systemImage: "star.fill")
+            if character.isFavorite {
+                EmptyView()
+            } else {
+                Button {
+                    character.isFavorite = true
+                    modelContext.insert(character)
+                    addFavorite.toggle()
+                } label: {
+                    Label("Favorite", systemImage: "star.fill")
+                }
+                .tint(.yellow)
+                .sensoryFeedback(.success, trigger: addFavorite)
             }
-            .tint(.yellow)
-            .sensoryFeedback(.success, trigger: addFavorite)
         }
         .swipeActions(edge: .leading) {
-            Button {
-                character.isFavorite = false
-                modelContext.insert(character)
-                removeFavorite.toggle()
-            } label: {
-                Label("Remove Favorite", systemImage: "star.slash.fill")
+            if character.isFavorite {
+                Button {
+                    character.isFavorite = false
+                    modelContext.insert(character)
+                    removeFavorite.toggle()
+                } label: {
+                    Label("Remove Favorite", systemImage: "star.slash.fill")
+                }
+                .tint(.red)
+                .sensoryFeedback(.success, trigger: removeFavorite)
+            } else {
+                EmptyView()
             }
-            .tint(.red)
-            .sensoryFeedback(.success, trigger: removeFavorite)
         }
     }
 }

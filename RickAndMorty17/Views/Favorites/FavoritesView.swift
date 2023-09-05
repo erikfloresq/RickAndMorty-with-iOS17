@@ -16,22 +16,23 @@ struct FavoritesView: View {
     
     var body: some View {
         NavigationStack {
-            if characters.isEmpty {
-                ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
-            } else {
-                List {
-                    ForEach(characters) { character in
-                        NavigationLink(value: character) {
-                            CharacterCell(character: character)
+            Group {
+                if characters.isEmpty {
+                    ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
+                } else {
+                    List {
+                        ForEach(characters) { character in
+                            NavigationLink(value: character) {
+                                CharacterCell(character: character)
+                            }
                         }
                     }
+                    .navigationDestination(for: RMCharacter.self, destination: { character in
+                        CharacterDetailView(character: character)
+                    })
                 }
-                .navigationDestination(for: RMCharacter.self, destination: { character in
-                    CharacterDetailView(character: character)
-                })
-            }
+            }.navigationTitle("Favorites")
         }
-        .navigationTitle("Favorites")
     }
 }
 

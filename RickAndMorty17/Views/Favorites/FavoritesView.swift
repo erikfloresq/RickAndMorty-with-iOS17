@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct FavoritesView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @Query(filter: #Predicate { $0.isFavorite == true },
            sort: [SortDescriptor(\RMCharacter.id)],
            animation: .easeInOut)
@@ -17,25 +19,58 @@ struct FavoritesView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if characters.isEmpty {
-                    ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
+                if horizontalSizeClass == .regular && verticalSizeClass == .regular {
+                    FavoritesRegularView(characters: characters)
                 } else {
-                    List {
-                        ForEach(characters) { character in
-                            NavigationLink(value: character) {
-                                CharacterCell(character: character)
-                            }
-                        }
-                    }
-                    .navigationDestination(for: RMCharacter.self, destination: { character in
-                        CharacterDetailView(character: character)
-                    })
-                }
+                    FavoritesCompactView(characters: characters)
+                }                
             }.navigationTitle("Favorites")
         }
     }
 }
 
-#Preview {
-    FavoritesView()
+struct FavoritesCompactView: View {
+    let characters: [RMCharacter]
+    
+    var body: some View {
+        if characters.isEmpty {
+            ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
+        } else {
+            List {
+                ForEach(characters) { character in
+                    NavigationLink(value: character) {
+                        CharacterCell(character: character)
+                    }
+                }
+            }
+            .navigationDestination(for: RMCharacter.self, destination: { character in
+                CharacterDetailView(character: character)
+            })
+        }
+    }
 }
+
+struct FavoritesRegularView: View {
+    let characters: [RMCharacter]
+    
+    var body: some View {
+        if characters.isEmpty {
+            ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
+        } else {
+            List {
+                ForEach(characters) { character in
+                    NavigationLink(value: character) {
+                        CharacterGrid(character: character)
+                    }
+                }
+            }
+            .navigationDestination(for: RMCharacter.self, destination: { character in
+                CharacterDetailView(character: character)
+            })
+        }
+    }
+}
+
+//#Preview {
+//    FavoritesView()
+//}

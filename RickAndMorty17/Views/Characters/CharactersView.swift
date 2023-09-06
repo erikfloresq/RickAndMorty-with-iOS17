@@ -11,15 +11,16 @@ import OSLog
 
 struct CharactersView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @Query(sort: [SortDescriptor(\RMCharacter.id)], animation: .easeInOut)
     private var characters: [RMCharacter]
     
     var body: some View {
         NavigationStack {
-            if horizontalSizeClass == .compact {
-                CharactersCompactView(characters: characters)
-            } else {
+            if horizontalSizeClass == .regular && verticalSizeClass == .regular {
                 CharactersRegularView(characters: characters)
+            } else {
+                CharactersCompactView(characters: characters)
             }
         }
     }

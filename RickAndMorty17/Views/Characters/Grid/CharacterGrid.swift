@@ -16,18 +16,21 @@ struct CharacterGrid: View {
                           name: character.name,
                           isFavorite: character.isFavorite)
         .contextMenu {
-            Button(action: {
-                character.isFavorite = true
-                modelContext.insert(character)
-            }, label: {
-                Label("Favorite", systemImage: "star.fill")
-            })
-            Button(action: {
-                character.isFavorite = false
-                modelContext.insert(character)
-            }, label: {
-                Label("Remove Favorite", systemImage: "star.slash.fill")
-            })
+            if character.isFavorite {
+                Button(role: .destructive, action: {
+                    character.isFavorite = false
+                    modelContext.insert(character)
+                }, label: {
+                    Label("Remove Favorite", systemImage: "star.slash.fill")
+                })
+            } else {
+                Button(action: {
+                    character.isFavorite = true
+                    modelContext.insert(character)
+                }, label: {
+                    Label("Favorite", systemImage: "star.fill")
+                })
+            }
         }
     }
 }
@@ -38,7 +41,7 @@ struct CharacterGridView: View {
     let isFavorite: Bool
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             AsyncImage(url: URL(string: image),
                        transaction: Transaction(animation: .easeInOut)) { imagePhase in
                 switch imagePhase {
@@ -46,19 +49,20 @@ struct CharacterGridView: View {
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 250, height: 250)
                         .clipShape(.rect(cornerRadius: 5))
-                case .failure, .empty:
+                case .failure:
+                    Color.red
+                case .empty:
                     Color.gray
                 @unknown default:
-                    EmptyView()
+                    Color.black
                 }
             }
-            .frame(width: 100, height: 100)
             .clipShape(.rect(cornerRadius: 5))
             .aspectRatio(1, contentMode: .fit)
             HStack {
-                Text(name)
+                Text(name).font(.title2).lineLimit(1)
                 if isFavorite {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)

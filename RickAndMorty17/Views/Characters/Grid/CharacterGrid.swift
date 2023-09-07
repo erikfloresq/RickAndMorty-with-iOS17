@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CharacterGrid: View {
     @Environment(\.modelContext) private var modelContext
+    @State private var presentDetail = false
     let character: RMCharacter
     
     var body: some View {
@@ -32,6 +33,12 @@ struct CharacterGrid: View {
                 })
             }
         }
+        .onTapGesture {
+            presentDetail.toggle()
+        }
+        .sheet(isPresented: $presentDetail) {
+            CharacterDetailView(character: character)
+        }
     }
 }
 
@@ -42,25 +49,28 @@ struct CharacterGridView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            AsyncImage(url: URL(string: image),
-                       transaction: Transaction(animation: .easeInOut)) { imagePhase in
-                switch imagePhase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 250, height: 250)
-                        .clipShape(.rect(cornerRadius: 5))
-                case .failure:
-                    Color.red
-                case .empty:
-                    Color.gray
-                @unknown default:
-                    Color.black
-                }
-            }
-            .clipShape(.rect(cornerRadius: 5))
-            .aspectRatio(1, contentMode: .fit)
+//            AsyncImage(url: URL(string: image),
+//                       transaction: Transaction(animation: .easeInOut)) { imagePhase in
+//                switch imagePhase {
+//                case .success(let image):
+//                    image
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width: 250, height: 250)
+//                        .clipShape(.rect(cornerRadius: 5))
+//                case .failure:
+//                    Color.red
+//                case .empty:
+//                    Color.gray
+//                @unknown default:
+//                    Color.black
+//                }
+//            }
+            Rectangle()
+                .frame(width: 250, height: 250)
+                .foregroundColor(.orange)
+                .clipShape(.rect(cornerRadius: 5))
+                .aspectRatio(1, contentMode: .fit)
             HStack {
                 Text(name).font(.title2).lineLimit(1)
                 if isFavorite {
@@ -69,6 +79,7 @@ struct CharacterGridView: View {
                 }
             }
         }
+        
     }
 }
 

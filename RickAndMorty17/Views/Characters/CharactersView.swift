@@ -59,7 +59,7 @@ struct CharactersRegularView: View {
                     CharacterGrid(character: character)
                 }
             }
-        }
+        }.navigationTitle("Characters")
     }
 }
 

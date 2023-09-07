@@ -168,8 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				08A2B20A2AA6C3F500B46C57 /* RootView */,
-				08A2B2052AA6BBD400B46C57 /* RegularView */,
-				08A2B2042AA6BBC100B46C57 /* CompactView */,
 				080C865A2A6DEA3400F62D5A /* Favorites */,
 				080C86342A6DC33400F62D5A /* CharacterDetailView */,
 				080C86312A6D954800F62D5A /* Characters */,
@@ -257,6 +255,8 @@
 			isa = PBXGroup;
 			children = (
 				08A2B20B2AA6C40100B46C57 /* RootView.swift */,
+				08A2B2042AA6BBC100B46C57 /* CompactView */,
+				08A2B2052AA6BBD400B46C57 /* RegularView */,
 			);
 			path = RootView;
 			sourceTree = "<group>";

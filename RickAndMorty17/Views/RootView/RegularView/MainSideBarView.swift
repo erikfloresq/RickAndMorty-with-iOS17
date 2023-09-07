@@ -1,5 +1,5 @@
 //
-//  MainTabView.swift
+//  MainSideBarView.swift
 //  RickAndMorty17
 //
 //  Created by Erik Flores on 4/09/23.
@@ -9,27 +9,28 @@ import SwiftUI
 import SwiftData
 import OSLog
 
-enum AppTabs {
-    case character
-    case favorite
-}
-
-struct MainTabView: View {
+struct MainSideBarView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var selectionTab: AppTabs = .character
     @Query private var characters: [RMCharacter]
     private let charactersViewModel = CharactersViewModel()
+    let items = ["Characters", "Favorites"]
     
     var body: some View {
-        TabView(selection: $selectionTab) {
-            CharactersView()
-                .tabItem {
+        NavigationSplitView {
+            List {
+                NavigationLink {
+                    CharactersView()
+                } label: {
                     Label("Characters", systemImage: "person")
                 }
-            FavoritesView()
-                .tabItem {
+                NavigationLink {
+                    FavoritesView()
+                } label: {
                     Label("Favorites", systemImage: "star")
                 }
+            }.navigationTitle("Rick&Morty")
+        } detail: {
+            CharactersView()
         }
         .task {
             do {
@@ -39,7 +40,7 @@ struct MainTabView: View {
                     Logger.tabView.info("Initial sync data")
                 }
             } catch {
-                Logger.tabView.error("Error to get Data")
+                Logger.characterView.error("Error to get Data")
             }
         }
     }

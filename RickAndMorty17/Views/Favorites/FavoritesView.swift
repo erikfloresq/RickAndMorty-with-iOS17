@@ -52,21 +52,22 @@ struct FavoritesCompactView: View {
 
 struct FavoritesRegularView: View {
     let characters: [RMCharacter]
+    let columns = [GridItem(.fixed(250), spacing: 10, alignment: .center),
+                   GridItem(.fixed(250), spacing: 10, alignment: .center),
+                   GridItem(.fixed(250), spacing: 10, alignment: .center)]
     
     var body: some View {
         if characters.isEmpty {
             ContentUnavailableView("You don't have any favorite", systemImage: "star.fill")
         } else {
-            List {
-                ForEach(characters) { character in
-                    NavigationLink(value: character) {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(characters) { character in
                         CharacterGrid(character: character)
                     }
                 }
+                Spacer()
             }
-            .navigationDestination(for: RMCharacter.self, destination: { character in
-                CharacterDetailView(character: character)
-            })
         }
     }
 }

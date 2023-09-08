@@ -69,6 +69,7 @@
 		08A2B2062AA6BBE700B46C57 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		08A2B2082AA6BC3300B46C57 /* MainSideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSideBarView.swift; sourceTree = "<group>"; };
 		08A2B20B2AA6C40100B46C57 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		08A2B20D2AAAC6BE00B46C57 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +101,7 @@
 		080C85F22A6D90B500F62D5A = {
 			isa = PBXGroup;
 			children = (
+				08A2B20D2AAAC6BE00B46C57 /* README.md */,
 				080C85FD2A6D90B500F62D5A /* RickAndMorty17 */,
 				080C86102A6D90B700F62D5A /* RickAndMorty17Tests */,
 				080C861A2A6D90B700F62D5A /* RickAndMorty17UITests */,

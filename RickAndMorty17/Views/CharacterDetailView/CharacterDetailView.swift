@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CharacterDetailView: View {
+    @Environment(\.modelContext) private var modelContext
     let character: RMCharacter
     
     var body: some View {
@@ -37,7 +38,6 @@ struct CharacterDetailView: View {
                             Spacer()
                         }
                     }
-                    
                 }
                 .frame(height: 350)
                 Grid(horizontalSpacing: 30) {
@@ -53,6 +53,21 @@ struct CharacterDetailView: View {
             }
         }
         .ignoresSafeArea(edges: .top)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    character.isFavorite = !character.isFavorite
+                    modelContext.insert(character)
+                } label: {
+                    if character.isFavorite {
+                        Label("Favorite", systemImage: "star.fill")
+                    } else {
+                        Label("Favorite", systemImage: "star")
+                    }
+                }.tint(.yellow)
+
+            }
+        }
     }
 }
 

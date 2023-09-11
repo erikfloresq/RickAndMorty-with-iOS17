@@ -13,7 +13,6 @@ struct MainSideBarView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var characters: [RMCharacter]
     private let charactersViewModel = CharactersViewModel()
-    let items = ["Characters", "Favorites"]
     
     var body: some View {
         NavigationSplitView {
@@ -30,7 +29,7 @@ struct MainSideBarView: View {
                 }
             }.navigationTitle("Rick&Morty")
         } detail: {
-            CharactersView()
+            ContentUnavailableView("Select a option", systemImage: "sidebar.left")
         }
         .task {
             do {

@@ -23,6 +23,9 @@ struct CharacterDetailView: View {
                         case .success(let image):
                             image
                                 .resizable()
+                                .scaledToFill()
+                                .frame(height: 350)
+                                .clipped()
                         case .failure, .empty:
                             Color.gray
                         @unknown default:
@@ -40,7 +43,6 @@ struct CharacterDetailView: View {
                         }
                     }
                 }
-                .frame(height: 350)
                 Grid(horizontalSpacing: 30) {
                     DetailGridRow(title: "Status", value: character.status)
                     DetailGridRow(title: "Species", value: character.species)

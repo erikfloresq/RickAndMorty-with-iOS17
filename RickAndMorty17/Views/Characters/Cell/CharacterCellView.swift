@@ -7,6 +7,7 @@
 
 import SwiftUI
 import OSLog
+import CachedAsyncImage
 
 struct CharacterCellView: View {
     let image: String
@@ -15,7 +16,7 @@ struct CharacterCellView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: image),
+            CachedAsyncImage(url: URL(string: image),
                        transaction: Transaction(animation: .easeInOut)) { imagePhase in
                 switch imagePhase {
                 case .success(let image):

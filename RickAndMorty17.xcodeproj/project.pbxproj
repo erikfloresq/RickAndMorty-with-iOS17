@@ -27,6 +27,7 @@
 		08A2B2072AA6BBE700B46C57 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2B2062AA6BBE700B46C57 /* MainTabView.swift */; };
 		08A2B2092AA6BC3300B46C57 /* MainSideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2B2082AA6BC3300B46C57 /* MainSideBarView.swift */; };
 		08A2B20C2AA6C40100B46C57 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A2B20B2AA6C40100B46C57 /* RootView.swift */; };
+		08A2B2102AAEB50600B46C57 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 08A2B20F2AAEB50600B46C57 /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				080C862C2A6D91BD00F62D5A /* RickAndMortyAPI in Frameworks */,
+				08A2B2102AAEB50600B46C57 /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +283,7 @@
 			name = RickAndMorty17;
 			packageProductDependencies = (
 				080C862B2A6D91BD00F62D5A /* RickAndMortyAPI */,
+				08A2B20F2AAEB50600B46C57 /* CachedAsyncImage */,
 			);
 			productName = RickAndMorty17;
 			productReference = 080C85FB2A6D90B500F62D5A /* RickAndMorty17.app */;
@@ -356,6 +359,7 @@
 			mainGroup = 080C85F22A6D90B500F62D5A;
 			packageReferences = (
 				080C862A2A6D91BD00F62D5A /* XCRemoteSwiftPackageReference "RickAndMortyAPI" */,
+				08A2B20E2AAEB50600B46C57 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = 080C85FC2A6D90B500F62D5A /* Products */;
 			projectDirPath = "";
@@ -752,6 +756,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		08A2B20E2AAEB50600B46C57 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -759,6 +771,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 080C862A2A6D91BD00F62D5A /* XCRemoteSwiftPackageReference "RickAndMortyAPI" */;
 			productName = RickAndMortyAPI;
+		};
+		08A2B20F2AAEB50600B46C57 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08A2B20E2AAEB50600B46C57 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

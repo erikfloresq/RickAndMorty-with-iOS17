@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CachedAsyncImage
 
 struct CharacterDetailView: View {
     @Environment(\.modelContext) private var modelContext
@@ -16,7 +17,7 @@ struct CharacterDetailView: View {
         ScrollView {
             VStack(spacing: 20) {
                 ZStack {
-                    AsyncImage(url: URL(string: character.image),
+                    CachedAsyncImage(url: URL(string: character.image),
                                transaction: Transaction(animation: .easeInOut)) { imagePhase in
                         switch imagePhase {
                         case .success(let image):

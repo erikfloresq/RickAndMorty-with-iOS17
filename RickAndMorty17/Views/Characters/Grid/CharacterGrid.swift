@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct CharacterGrid: View {
     @Environment(\.modelContext) private var modelContext
@@ -49,7 +50,7 @@ struct CharacterGridView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            AsyncImage(url: URL(string: image),
+            CachedAsyncImage(url: URL(string: image),
                        transaction: Transaction(animation: .easeInOut)) { imagePhase in
                 switch imagePhase {
                 case .success(let image):

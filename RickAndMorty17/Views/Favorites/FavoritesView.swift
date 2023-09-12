@@ -17,15 +17,13 @@ struct FavoritesView: View {
     private var characters: [RMCharacter]
     
     var body: some View {
-        NavigationStack {
-            Group {
-                if horizontalSizeClass == .regular && verticalSizeClass == .regular {
-                    FavoritesRegularView(characters: characters)
-                } else {
-                    FavoritesCompactView(characters: characters)
-                }                
-            }.navigationTitle("Favorites")
-        }
+        Group {
+            if horizontalSizeClass == .regular && verticalSizeClass == .regular {
+                FavoritesRegularView(characters: characters)
+            } else {
+                FavoritesCompactView(characters: characters)
+            }
+        }.navigationTitle("Favorites")
     }
 }
 

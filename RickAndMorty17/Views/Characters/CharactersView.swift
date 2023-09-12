@@ -16,12 +16,10 @@ struct CharactersView: View {
     private var characters: [RMCharacter]
     
     var body: some View {
-        NavigationStack {
-            if horizontalSizeClass == .regular && verticalSizeClass == .regular {
-                CharactersRegularView(characters: characters)
-            } else {
-                CharactersCompactView(characters: characters)
-            }
+        if horizontalSizeClass == .regular && verticalSizeClass == .regular {
+            CharactersRegularView(characters: characters)
+        } else {
+            CharactersCompactView(characters: characters)
         }
     }
 }

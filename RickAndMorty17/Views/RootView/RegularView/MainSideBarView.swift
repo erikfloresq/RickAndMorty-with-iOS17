@@ -16,16 +16,18 @@ struct MainSideBarView: View {
     
     var body: some View {
         NavigationSplitView {
-            List {
-                NavigationLink {
-                    CharactersView()
-                } label: {
-                    Label("Characters", systemImage: "person")
-                }
-                NavigationLink {
-                    FavoritesView()
-                } label: {
-                    Label("Favorites", systemImage: "star")
+            NavigationStack {
+                List {
+                    NavigationLink {
+                        CharactersView()
+                    } label: {
+                        Label("Characters", systemImage: "person")
+                    }
+                    NavigationLink {
+                        FavoritesView()
+                    } label: {
+                        Label("Favorites", systemImage: "star")
+                    }
                 }
             }.navigationTitle("Rick&Morty")
         } detail: {

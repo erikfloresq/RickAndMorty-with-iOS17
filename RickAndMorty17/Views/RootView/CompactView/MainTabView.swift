@@ -22,14 +22,16 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selectionTab) {
-            CharactersView()
-                .tabItem {
-                    Label("Characters", systemImage: "person")
-                }
-            FavoritesView()
-                .tabItem {
-                    Label("Favorites", systemImage: "star")
-                }
+            NavigationStack {
+                CharactersView()
+            }.tabItem {
+                Label("Characters", systemImage: "person")
+            }
+            NavigationStack {
+                FavoritesView()
+            }.tabItem {
+                Label("Favorites", systemImage: "star")
+            }
         }
         .task {
             do {

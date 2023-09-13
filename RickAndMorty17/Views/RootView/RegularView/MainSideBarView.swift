@@ -9,14 +9,20 @@ import SwiftUI
 import SwiftData
 import OSLog
 
+enum AppOptions: CaseIterable {
+    case character
+    case favorite
+}
+
 struct MainSideBarView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var characters: [RMCharacter]
     private let charactersViewModel = CharactersViewModel()
+    @State private var path: [AppOptions] = []
     
     var body: some View {
         NavigationSplitView {
-            NavigationStack {
+            NavigationStack(path: $path) {
                 List {
                     NavigationLink {
                         CharactersView()

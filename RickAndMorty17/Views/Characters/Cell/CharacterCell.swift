@@ -33,7 +33,7 @@ struct CharacterCell: View {
                 .sensoryFeedback(.success, trigger: addFavorite)
             }
         }
-        .swipeActions(edge: .leading) {
+        .swipeActions(edge: .trailing) {
             if character.isFavorite {
                 Button {
                     character.isFavorite = false
